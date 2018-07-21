@@ -93,32 +93,21 @@ class ContactData extends Component {
         },
     },
     formIsValid: false,
-    // loading: false
   }
 
   orderHandler = ( event ) => {
-    //use preventDefault to prevent it from sending a request and reloading the page
     event.preventDefault();
-    //send data to the firebase backend (using .json is firebase specific):
-    // this.setState( { loading: true } );
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
     }
     const order = {
       ingredients: this.props.ings,
-    //   //in production you would re-calculate the price on the server side to avoid manipulation by users
       price: this.props.price,
-      orderData: formData
+      orderData: formData,
+      userId: this.props.userId
     }
-    // axios.post('/orders.json', order)
-    //       .then(response => {
-    //           this.setState( { loading: false } );
-    //           this.props.history.push('/');
-    //       })
-    //       .catch(error => {
-    //           this.setState( { loading: false } );
-    //       });
+
     this.props.onOrderBurger( order, this.props.token );
   }
 
@@ -214,7 +203,8 @@ const mapStateToProps = state => {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
     loading: state.order.loading,
-    token: state.auth.token
+    token: state.auth.token,
+    userId: state.auth.userId
   }
 };
 
