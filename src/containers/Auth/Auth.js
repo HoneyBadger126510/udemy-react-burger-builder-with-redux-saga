@@ -9,7 +9,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 import { updateObject, checkValidity } from '../../shared/utility';
 
-
 class Auth extends Component {
   state = {
     controls: {
